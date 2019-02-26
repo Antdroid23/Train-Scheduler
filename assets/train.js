@@ -11,6 +11,10 @@ var config = {
 
 var database = firebase.database(); // database reference
 
+// var trainName = "";
+// var destination = "";
+// var startTime = "";
+// var frequency = 0;
 
   // 2. Button for adding train data
 $("#submit").on("click", function(event) {
@@ -62,6 +66,17 @@ database.ref().on("child_added", function(childsnapshot) {
         console.log(trainDestination);
         console.log(firstTrain);
         console.log(frequencyMin);
+
+  $("#table").append(
+    "<tr><td id='train-name'>" + childSnapshot.val().name +
+    "<td id='destination'>" + childSnapshot.val().destination + 
+    "<td id='frequency-min'>" + childSnapshot.val().frequency +
+    "<td id='arrivalDisplay'>" + arrivalDisplay + 
+    "<td id='awayDisplay'>" + timeAway + " minutes until arrival" + "</td></tr>");
+
+    // console.log(arrivalDisplay);
+    // console.log(timeAway);
+  });
 
    
     calcMinutesAway(snapshot.val());
