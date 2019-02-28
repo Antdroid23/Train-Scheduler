@@ -9,12 +9,7 @@ var config = {
   };
   firebase.initializeApp(config);
 
-var database = firebase.database(); // database reference
-
-// var trainName = "";
-// var destination = "";
-// var startTime = "";
-// var frequency = 0;
+var database = firebase.database();
 
   // 2. Button for adding train data
 $("#submit").on("click", function(event) {
@@ -67,12 +62,11 @@ database.ref().on("child_added", function(childsnapshot) {
         console.log(firstTrain);
         console.log(frequencyMin);
    
+
     calcMinutesAway(snapshot.val());
     }, function(errorObject) { // If any errors are experienced, log them to console
     console.log("The read failed: " + errorObject.code);
 });
-
-
 
 function calcMinutesAway(train) {
     // First Time (pushed back 1 year to make sure it comes before current time)
@@ -91,7 +85,7 @@ function calcMinutesAway(train) {
     var tRemainder = diffTime % train.frequency;
     console.log("time apart is: " + tRemainder);
 
-    // Minute Until Train
+    // Minutes Until Train
     var tMinutesTillTrain = train.frequency - tRemainder;
     console.log("min until next train: " + tMinutesTillTrain);
 
@@ -101,8 +95,6 @@ function calcMinutesAway(train) {
 
     display(train, tMinutesTillTrain, nextTrain);
 }
-  
-
 
 function display(train, tMinutesTillTrain, nextTrain) {
 
@@ -117,5 +109,5 @@ function display(train, tMinutesTillTrain, nextTrain) {
     }
   
       
-    $("#table").append($row)
+    $("#table").append($row);
   }
